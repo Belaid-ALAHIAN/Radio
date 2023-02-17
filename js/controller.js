@@ -1,10 +1,13 @@
 import * as modul from "./modul.js";
 import playerView from "./views/playerView.js";
 const stationsContainer = document.querySelector(".stations-list");
+const btn_next = document.getElementById("btn_next");
+const btn_prev = document.getElementById("btn_prev");
+const page_span = document.getElementById("page");
 let current_page = 1;
-let records_per_page = 2;
+let records_per_page = 7;
 modul.loadStations().then((stations) => {
-  modul.state.station = stations.slice(50, 57);
+  modul.state.station = stations.sort((a, b) => b.votes - a.votes);
   console.log("stations:", stations);
   playerView.render(
     stations[10].url_resolved,
@@ -13,11 +16,12 @@ modul.loadStations().then((stations) => {
   );
   console.log(stations[10].name);
   playerView.playerActivity();
-  modul.state.station.forEach((staion) => {
-    renderStation(staion);
-  });
-  stationsList = document.querySelectorAll(".station-details");
-  playStation(stationsList);
+  // modul.state.station.forEach((staion) => {
+  //   renderStation(staion);
+  // });
+  changePage(1);
+  //stationsList = document.querySelectorAll(".station-details");
+  playStation();
 });
 
 const renderStation = function (station) {
@@ -39,7 +43,8 @@ const renderStation = function (station) {
   stationsContainer.insertAdjacentHTML("beforeend", markup);
 };
 
-const playStation = function (stationsList) {
+const playStation = function () {
+  stationsList = document.querySelectorAll(".station-details");
   console.log(modul.state.station);
   stationsList.forEach((station) => {
     station.addEventListener("click", function (e) {
@@ -71,3 +76,58 @@ const playStation = function (stationsList) {
 };
 
 //pagination
+function prevPage() {
+  if (current_page > 1) {
+    current_page--;
+    changePage(current_page);
+    playStation();
+  }
+}
+
+function nextPage() {
+  if (current_page < numPages()) {
+    current_page++;
+    changePage(current_page);
+    playStation();
+  }
+}
+
+function changePage(page) {
+  // Validate page
+  console.log("changefunc");
+  if (page < 1) page = 1;
+  if (page > numPages()) page = numPages();
+
+  stationsContainer.innerHTML = "";
+
+  for (
+    var i = (page - 1) * records_per_page;
+    i < page * records_per_page;
+    i++
+  ) {
+    //listing_table.innerHTML += modul.state.station[i].adName + "<br>";
+    renderStation(modul.state.station[i]);
+  }
+  page_span.innerHTML = page;
+
+  if (page == 1) {
+    btn_prev.style.visibility = "hidden";
+  } else {
+    btn_prev.style.visibility = "visible";
+  }
+
+  if (page == numPages()) {
+    btn_next.style.visibility = "hidden";
+  } else {
+    btn_next.style.visibility = "visible";
+  }
+}
+function numPages() {
+  return Math.ceil(modul.state.station.length / records_per_page);
+}
+
+// window.onload = function() {
+//     changePage(1);
+// };
+btn_next.addEventListener("click", nextPage);
+btn_prev.addEventListener("click", prevPage);
