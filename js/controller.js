@@ -29,7 +29,7 @@ const renderStation = function (station) {
   console.log(station.favicon.length);
   if (station.favicon.length === 0) {
     markup = `<li class="station-details" data-station-uid="${station.stationuuid}">
-      <div class="st-logo"><img src="https://us.123rf.com/450wm/wahyufrida/wahyufrida1909/wahyufrida190900710/wahyufrida190900710.jpg?ver=6" class="station-img" /></div>
+      <div class="st-logo"><img src="https://i.imgur.com/MtRDWSz.jpg" class="station-img" /></div>
      <div class="station-desc"-> <h2 class="station-name">${station.name}</h2></div>
      <div class="station-votes"-> <h2 class="station-name">Votes: ${station.votes}</h2></div>
      <div class="station-tags"-> <h2 class="station-name">Type: ${station.tags}</h2></div>

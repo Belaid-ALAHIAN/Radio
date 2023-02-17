@@ -74,11 +74,11 @@ body {
   max-width: 120rem;
   background-color: #fff;
   border-radius: 9px;
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr 10fr 1fr;
 
-  grid-row-gap: 2px;
+  grid-row-gap: 2px; */
   margin: 4vw auto;
 
   overflow: hidden;
@@ -108,7 +108,8 @@ button {
   box-shadow: inset 0px 0rem 0.5rem 0rem #ff4800;
   border-radius: 20px;
   position: relative;
-  margin: 100px auto;
+
+  margin: 35px auto;
   width: 95%;
   max-width: 500px;
   height: 132px;
@@ -146,6 +147,7 @@ path {
 }
 .info-player {
   text-align: center;
+  margin: 20px auto;
 }
 .btn {
   background-color: #f38e82;
@@ -166,6 +168,7 @@ path {
   font-size: 1.5rem;
   border-radius: 20px;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 output {
@@ -290,4 +293,22 @@ input[type="range"]::-ms-thumb {
 input[type="range"]:active::-ms-thumb {
   transform: scale(1.2);
   background: #ff4800;
+}
+
+@media (min-width: 780px) {
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 10fr 1fr;
+
+    grid-row-gap: 2px;
+  }
+  #player {
+    text-align: center;
+  }
+  .info-player {
+  }
+  #audio-player-container {
+    margin: 100px auto;
+  }
 }
