@@ -5,7 +5,7 @@ export const state = {
 //list off all radio
 export const loadStations = function () {
   return fetch(
-    "http://de1.api.radio-browser.info/json/stations/bycountry/morocco"
+    "https://de1.api.radio-browser.info/json/stations/bycountry/morocco"
   )
     .then((response) => {
       if (!response.ok) {
