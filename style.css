@@ -284,6 +284,9 @@ input[type="range"]:active::-ms-thumb {
   transform: scale(1.2);
   background: #ff4800;
 }
+.container{
+  border: 3px solid #F44336;
+}
 
 @media (min-width: 780px) {
   body {
