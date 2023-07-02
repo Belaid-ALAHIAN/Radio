@@ -5,7 +5,7 @@ const btn_next = document.getElementById("btn_next");
 const btn_prev = document.getElementById("btn_prev");
 const page_span = document.getElementById("page");
 let current_page = 1;
-let records_per_page = 7;
+let records_per_page = 5;
 modul.loadStations().then((stations) => {
   modul.state.station = stations.sort((a, b) => b.votes - a.votes);
   console.log("stations:", stations);
@@ -31,14 +31,10 @@ const renderStation = function (station) {
     markup = `<li class="station-details" data-station-uid="${station.stationuuid}">
       <div class="st-logo"><img src="https://i.imgur.com/MtRDWSz.jpg" class="station-img" /></div>
      <div class="station-desc"-> <h2 class="station-name">${station.name}</h2></div>
-     <div class="station-votes"-> <h2 class="station-name">Votes: ${station.votes}</h2></div>
-     <div class="station-tags"-> <h2 class="station-name">Type: ${station.tags}</h2></div>
     </li>`;
   } else {
     markup = `<li class="station-details" data-station-uid="${station.stationuuid}"><div class="st-logo"><img src="${station.favicon}" class="station-img"/></div>
-    <div class="station-desc"-> <h2 class="station-name">${station.name}</h2></div>
-    <div class="station-votes"-> <h2 class="station-name">Votes: ${station.votes}</h2></div>
-    <div class="station-tags"-> <h2 class="station-name">Type: ${station.tags}</h2></div>`;
+    <div class="station-desc"-> <h2 class="station-name">${station.name}</h2></div>`;
   }
   stationsContainer.insertAdjacentHTML("beforeend", markup);
 };
@@ -51,16 +47,22 @@ const playStation = function () {
       const selecteEl = e.target.closest(".station-details");
       console.log(selecteEl);
       console.log(selecteEl.dataset.stationUid);
+
       console.log(modul.state.station[3].stationUid);
       const selectedStation = modul.state.station.find((el) => {
         return el.stationuuid === selecteEl.dataset.stationUid;
       });
+      selectedStation.style = `
+        box-shadow: -5px 0px 1rem 4px #df460a;
+        margin-left: 6px;
+    `;
       console.log(selectedStation);
       playerView.render(
         selectedStation.url_resolved,
         selectedStation.name,
         selectedStation.homepage
       );
+
       playerView.audio.volume = playerView.audiovolume;
       playerView.audioPlayer.style.setProperty(
         "--volume-before-width",
