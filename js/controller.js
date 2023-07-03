@@ -8,13 +8,13 @@ let current_page = 1;
 let records_per_page = 5;
 modul.loadStations().then((stations) => {
   modul.state.station = stations.sort((a, b) => b.votes - a.votes);
-  console.log("stations:", stations);
+
   playerView.render(
     stations[10].url_resolved,
     stations[10].name,
     stations[10].homepage
   );
-  console.log(stations[10].name);
+
   playerView.playerActivity();
   // modul.state.station.forEach((staion) => {
   //   renderStation(staion);
@@ -26,7 +26,7 @@ modul.loadStations().then((stations) => {
 
 const renderStation = function (station) {
   let markup;
-  console.log(station.favicon.length);
+
   if (station.favicon.length === 0) {
     markup = `<li class="station-details" data-station-uid="${station.stationuuid}">
       <div class="st-logo"><img src="https://i.imgur.com/MtRDWSz.jpg" class="station-img" /></div>
@@ -41,14 +41,11 @@ const renderStation = function (station) {
 
 const playStation = function () {
   const stationsList = document.querySelectorAll(".station-details");
-  console.log(modul.state.station);
+
   stationsList.forEach((station) => {
     station.addEventListener("click", function (e) {
       const selecteEl = e.target.closest(".station-details");
-      console.log(selecteEl);
-      console.log(selecteEl.dataset.stationUid);
 
-      console.log(modul.state.station[3].stationUid);
       const selectedStation = modul.state.station.find((el) => {
         return el.stationuuid === selecteEl.dataset.stationUid;
       });
@@ -56,7 +53,7 @@ const playStation = function () {
         box-shadow: -5px 0px 1rem 4px #df460a;
         margin-left: 6px;
     `;
-      console.log(selectedStation);
+
       playerView.render(
         selectedStation.url_resolved,
         selectedStation.name,
@@ -96,7 +93,7 @@ function nextPage() {
 
 function changePage(page) {
   // Validate page
-  console.log("changefunc");
+
   if (page < 1) page = 1;
   if (page > numPages()) page = numPages();
 

@@ -103,10 +103,10 @@ class View {
 
     this.volumeSlider.addEventListener("input", (e) => {
       const value = e.target.value;
-      console.log(value);
+
       this.outputContainer.textContent = value;
       this.audio.volume = value / 100;
-      console.log(this.audio.volume);
+
       this.audiovolume = this.audio.volume;
     });
   }
