@@ -40,7 +40,7 @@ const renderStation = function (station) {
 };
 
 const playStation = function () {
-  stationsList = document.querySelectorAll(".station-details");
+  const stationsList = document.querySelectorAll(".station-details");
   console.log(modul.state.station);
   stationsList.forEach((station) => {
     station.addEventListener("click", function (e) {
